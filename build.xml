@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="SearchAlgorithmSimulator" basedir=".">
+<description>
+    This program simulates one of three searching algorithms, breadth-first search, depth-first search and A* in a maze according to user's input.
+</description>
+
+<property name="build_dir" location="build" />
+
+<target name="init">
+    <mkdir dir="${build_dir}/classes"/>
+</target>
+
+<target name="clean">
+    <delete dir="${build_dir}" failonerror="false" />
+</target>
+
+<property name="classes" location="${build_dir}/classes"/>
+
+<property name="src" location="src" />
+
+<target name="compile" depends="init" description="Compile">
+    <javac includeantruntime="false" debug="true" destdir="${classes}"
+           srcdir="${src}" includes="**/*.java">
+    </javac>
+</target>
+
+<property name="documentation" location="${build_dir}/documentation" />
+
+<target name="doc" depends="init"
+        description="Generates JavaDoc documentation">
+    <mkdir dir="${documentation}"/>
+    <javadoc charset="UTF-8" access="public" sourcepath="${src}"
+             destdir="${documentation}"
+        Doctitle="SearchAlgorithmSimulator">
+    </javadoc>
+</target>
+
+<target name="build-jar" depends="init,compile">
+    <jar destfile="${build_dir}/SearchAlgorithmSimulator.jar" basedir="${classes}"
+         includes="**/*">
+		   <manifest>
+			<attribute name="Main-Class" value="Main" />
+		   </manifest>
+		     <jar jarfile="${babelnet.jar}">
+    <fileset dir="${bin.dir}">
+      <include name="resources/*.properties"/>
+    </fileset>
+    </jar>
+</target>
+
+</project>
+
